@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Invitation – Démo WOW Graphine (Noir & Doré)</title>
+
+<style>
+  :root{
+    --black:#0b0c0f;
+    --ink:#151821;
+    --cream:#F4F0EA;
+    --gold:#D4AF37;    /* doré */
+    --gold2:#B8902F;   /* doré profond */
+    --petrol:#113E53;  /* Graphine, discret */
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background: var(--black);
+    color: var(--cream);
+    font-family: ui-serif, Georgia, "Times New Roman", serif;
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    padding:28px;
+    background:
+      radial-gradient(900px 500px at 50% 15%, rgba(212,175,55,.16), transparent 60%),
+      linear-gradient(180deg, rgba(11,12,15,.35), rgba(11,12,15,.90)),
+      url("https://images.unsplash.com/photo-1523437237164-d442d57cc3c9?q=80&w=1600&auto=format&fit=crop");
+    background-size:cover;
+    background-position:center;
+  }
+
+  .glass{
+    width:min(720px, 100%);
+    border:1px solid rgba(244,240,234,.18);
+    border-radius:26px;
+    background: rgba(11,12,15,.58);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 26px 90px rgba(0,0,0,.45);
+    padding:28px;
+    text-align:center;
+  }
+
+  .kicker{
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-size:.74rem;
+    opacity:.86;
+    margin:0 0 10px;
+  }
+
+  h1{
+    margin:0;
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height:1.06;
+  }
+
+  .sub{
+    margin:14px 0 18px;
+    font-size:1.05rem;
+    opacity:.92;
+  }
+
+  /* Gold divider */
+  .divider{
+    width: 92px;
+    height: 2px;
+    margin: 14px auto 0;
+    border-radius:999px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,.95), transparent);
+  }
+
+  /* Envelope */
+  .env-wrap{
+    margin: 18px auto 18px;
+    width: 240px;
+    height: 160px;
+    perspective: 900px;
+  }
+  .envelope{
+    width:100%;
+    height:100%;
+    border-radius:20px;
+    border: 1px solid rgba(244,240,234,.18);
+    background:
+      radial-gradient(220px 140px at 30% 10%, rgba(212,175,55,.18), transparent 60%),
+      rgba(21,24,33,.55);
+    position:relative;
+    overflow:hidden;
+  }
+  .paper{
+    position:absolute;
+    left:16px; right:16px; bottom:16px;
+    height: 118px;
+    border-radius:16px;
+    background: rgba(244,240,234,.97);
+    transform: translateY(86px);
+    transition: transform .9s ease;
+    box-shadow: 0 18px 30px rgba(0,0,0,.25);
+  }
+  .paper::after{
+    content:"";
+    position:absolute;
+    inset: 18px 18px auto 18px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(21,24,33,.10);
+  }
+  .flap{
+    position:absolute;
+    inset:0;
+    background: linear-gradient(180deg, rgba(212,175,55,.25), rgba(21,24,33,.22));
+    clip-path: polygon(0 0, 100% 0, 50% 65%);
+    transform-origin: top;
+    transition: transform .9s ease;
+  }
+  .seal{
+    position:absolute;
+    left:50%; bottom: 22px;
+    transform: translateX(-50%);
+    width: 46px; height: 46px;
+    border-radius:999px;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.32), transparent 45%),
+                linear-gradient(180deg, rgba(212,175,55,.98), rgba(184,144,47,.92));
+    box-shadow: 0 16px 34px rgba(0,0,0,.32);
+  }
+  .opened .flap{ transform: rotateX(165deg); }
+  .opened .paper{ transform: translateY(0); }
+  .opened .seal{ opacity:0; transform: translateX(-50%) scale(.92); transition: all .35s ease; }
+
+  /* Buttons */
+  .btn-row{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top: 14px;
+  }
+  .btn{
+    border:none;
+    border-radius: 999px;
+    padding: 12px 18px;
+    cursor:pointer;
+    font-weight: 750;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    letter-spacing:.01em;
+  }
+  .btn.primary{
+    background: linear-gradient(180deg, rgba(212,175,55,.98), rgba(184,144,47,.88));
+    color: #111;
+  }
+  .btn.ghost{
+    background: rgba(244,240,234,.06);
+    border: 1px solid rgba(244,240,234,.18);
+    color: var(--cream);
+  }
+  .meta{
+    margin: 14px 0 0;
+    opacity:.80;
+    font-family: ui-sans-serif, system-ui;
+    font-size:.92rem;
+  }
+  .meta b{ color: rgba(212,175,55,.95); }
+
+  /* INVITATION PAGE */
+  .inv{
+    display:none;
+    min-height:100vh;
+    padding: 34px 18px;
+    background:
+      radial-gradient(1200px 600px at 50% 10%, rgba(212,175,55,.08), transparent 60%),
+      linear-gradient(180deg, rgba(244,240,234,.96), rgba(244,240,234,.92));
+    color: #121318;
+  }
+
+  .card{
+    width:min(760px, 100%);
+    margin: 0 auto;
+    border-radius: 28px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 26px 90px rgba(0,0,0,.10);
+    overflow:hidden;
+    opacity:0;
+    transform: translateY(14px);
+  }
+  .card.show{ animation: reveal .85s ease forwards; }
+  @keyframes reveal{ to{opacity:1; transform: translateY(0);} }
+
+  .head{
+    padding: 30px 26px 18px;
+    text-align:center;
+    background:
+      radial-gradient(900px 260px at 50% 0%, rgba(212,175,55,.16), transparent 60%),
+      linear-gradient(180deg, rgba(21,24,33,.06), transparent);
+  }
+
+  .names{
+    margin:0;
+    font-size: clamp(2.0rem, 3.8vw, 3.0rem);
+    line-height:1.1;
+  }
+  .goldline{
+    width: 96px;
+    height: 2px;
+    margin: 16px auto;
+    border-radius:999px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,.95), transparent);
+  }
+  .date{
+    font-family: ui-sans-serif, system-ui;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-size:.82rem;
+    color: rgba(18,19,24,.62);
+  }
+
+  .body{
+    padding: 10px 26px 28px;
+    text-align:center;
+    line-height: 1.7;
+  }
+  .block{ margin: 18px 0; }
+  .label{
+    font-family: ui-sans-serif, system-ui;
+    letter-spacing:.20em;
+    text-transform:uppercase;
+    font-size:.72rem;
+    color: rgba(18,19,24,.58);
+    margin-bottom: 6px;
+  }
+
+  .cta{
+    margin-top: 16px;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  a.pill{
+    display:inline-block;
+    padding: 12px 16px;
+    border-radius: 999px;
+    text-decoration:none;
+    font-weight: 750;
+    font-family: ui-sans-serif, system-ui;
+    border: 1px solid rgba(21,24,33,.14);
+    color: var(--ink);
+    background: rgba(21,24,33,.04);
+  }
+  a.pill.primary{
+    border:none;
+    background: linear-gradient(180deg, rgba(212,175,55,.98), rgba(184,144,47,.88));
+    color: #111;
+  }
+
+  .footer{
+    margin-top: 22px;
+    font-family: ui-sans-serif, system-ui;
+    font-size: .88rem;
+    color: rgba(18,19,24,.55);
+  }
+  .tag{
+    display:inline-block;
+    margin-top:10px;
+    padding: 6px 10px;
+    border-radius:999px;
+    background: rgba(17,62,83,.06); /* Graphine discret */
+    border:1px solid rgba(17,62,83,.12);
+    color: rgba(17,62,83,.92);
+    font-family: ui-sans-serif, system-ui;
+    font-size:.78rem;
+  }
+
+  /* Confetti */
+  canvas#confetti{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .opened .flap, .opened .paper, .card.show { transition:none; animation:none; }
+  }
+</style>
+</head>
+
+<body>
+<canvas id="confetti"></canvas>
+
+<section class="hero" id="screen1">
+  <div class="glass">
+    <p class="kicker">Démo invitation numérique Graphine</p>
+    <h1>Lucie & Thomas</h1>
+    <div class="divider"></div>
+    <p class="sub">ont l’honneur de vous convier à une célébration élégante</p>
+
+    <div class="env-wrap" aria-hidden="true">
+      <div class="envelope" id="envelope">
+        <div class="flap"></div>
+        <div class="paper"></div>
+        <div class="seal"></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn primary" id="openBtn">Ouvrir l’invitation</button>
+      <button class="btn ghost" id="musicBtn">🔊 Activer la musique</button>
+    </div>
+
+    <p class="meta">
+      Style <b>Noir & Doré</b> • Lien partageable • À partir de <b>250 €</b> (hors impression)
+    </p>
+  </div>
+</section>
+
+<section class="inv" id="screen2">
+  <div class="card" id="card">
+    <div class="head">
+      <p class="names">Lucie & Thomas</p>
+      <div class="goldline"></div>
+      <div class="date">12 juin 2026</div>
+    </div>
+
+    <div class="body">
+      <div class="block">
+        <div class="label">Cérémonie</div>
+        15h00 • Domaine des Vignes • Alsace
+      </div>
+
+      <div class="block">
+        <div class="label">Réception</div>
+        Cocktail puis dîner • Tenue élégante
+      </div>
+
+      <div class="block">
+        <div class="label">Informations</div>
+        Une réponse nous aide beaucoup pour l’organisation.
+      </div>
+
+      <div class="cta">
+        <a class="pill" href="https://www.google.com/maps" target="_blank">📍 Voir le lieu</a>
+        <a class="pill primary" href="https://wa.me/" target="_blank">✅ RSVP WhatsApp</a>
+      </div>
+
+      <div class="footer">
+        Démo Graphine • La clarté n’est pas un style. C’est une décision.
+        <div class="tag">Animation + musique + confettis dorés</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<audio id="bgm" loop>
+  <!-- Mets un fichier ici: demo-wow/assets/music.mp3 puis active la ligne -->
+  <!-- <source src="assets/music.mp3" type="audio/mpeg"> -->
+</audio>
+
+<script>
+  // Open invitation
+  const openBtn = document.getElementById('openBtn');
+  const envelope = document.getElementById('envelope');
+  const s1 = document.getElementById('screen1');
+  const s2 = document.getElementById('screen2');
+  const card = document.getElementById('card');
+
+  openBtn.addEventListener('click', () => {
+    envelope.classList.add('opened');
+    openBtn.disabled = true;
+    openBtn.textContent = "Ouverture…";
+    setTimeout(() => {
+      s1.style.display = 'none';
+      s2.style.display = 'block';
+      card.classList.add('show');
+      launchConfetti(1900);
+      window.scrollTo(0,0);
+    }, 900);
+  });
+
+  // Music toggle
+  const musicBtn = document.getElementById('musicBtn');
+  const bgm = document.getElementById('bgm');
+  let musicOn = false;
+
+  musicBtn.addEventListener('click', async () => {
+    try{
+      if(!musicOn){
+        await bgm.play();
+        musicOn = true;
+        musicBtn.textContent = "🔈 Musique activée";
+      }else{
+        bgm.pause();
+        musicOn = false;
+        musicBtn.textContent = "🔊 Activer la musique";
+      }
+    }catch(e){
+      musicBtn.textContent = "🎵 Ajoute un fichier music.mp3";
+    }
+  });
+
+  // Confetti (gold only for luxe)
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  let W, H, raf, confetti = [];
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function launchConfetti(durationMs){
+    confetti = [];
+    const count = 150;
+
+    for(let i=0;i<count;i++){
+      confetti.push({
+        x: Math.random()*W,
+        y: -20 - Math.random()*H*0.2,
+        w: 6 + Math.random()*6,
+        h: 3 + Math.random()*4,
+        vx: (Math.random()-0.5)*2.8,
+        vy: 2.2 + Math.random()*3.1,
+        rot: Math.random()*Math.PI,
+        vr: (Math.random()-0.5)*0.22,
+        c: [ "rgba(212,175,55,.95)", "rgba(184,144,47,.95)", "rgba(244,240,234,.85)" ][Math.floor(Math.random()*3)]
+      });
+    }
+
+    const start = performance.now();
+    cancelAnimationFrame(raf);
+
+    function tick(t){
+      const elapsed = t - start;
+      ctx.clearRect(0,0,W,H);
+
+      confetti.forEach(p=>{
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.c;
+        ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        ctx.restore();
+
+        if(p.y > H + 40){
+          p.y = -30;
+          p.x = Math.random()*W;
+        }
+      });
+
+      if(elapsed < durationMs){
+        raf = requestAnimationFrame(tick);
+      }else{
+        ctx.clearRect(0,0,W,H);
+      }
+    }
+    raf = requestAnimationFrame(tick);
+  }
+</script>
+</body>
+</html>
