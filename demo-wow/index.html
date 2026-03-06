@@ -26,87 +26,28 @@
       color: #2a2a2a;
     }
 
-    /* INTRO */
-    #intro {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background:
-        linear-gradient(rgba(246,243,238,0.75), rgba(246,243,238,0.85)),
-        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
+<section id="intro">
+  <div class="intro-overlay"></div>
 
-    #intro.hide {
-      opacity: 0;
-      transform: scale(0.98);
-      pointer-events: none;
-    }
+  <div class="envelope-wrap">
+    <div class="envelope" id="envelope">
+      <div class="envelope-flap"></div>
+      <div class="envelope-body"></div>
 
-    .intro-card {
-      width: 100%;
-      max-width: 420px;
-      text-align: center;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(4px);
-      border-radius: 24px;
-      padding: 36px 24px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.10);
-    }
-
-    .envelope {
-      font-size: 58px;
-      margin-bottom: 14px;
-      animation: float 2.3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0); }
-    }
-
-    .surtitle {
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #7d7d7d;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 42px;
-      line-height: 1.1;
-      margin: 0 0 12px;
-    }
-
-    .intro-text {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #4f4f4f;
-      margin-bottom: 24px;
-    }
-
-    .open-btn {
-      border: none;
-      border-radius: 999px;
-      padding: 14px 26px;
-      background: #8a9a8c;
-      color: white;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(138,154,140,0.25);
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .open-btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
-    }
+      <div class="letter">
+        <div class="letter-inner">
+          <div class="surtitle">Démo Graphine</div>
+          <h1>Marie & Thomas</h1>
+          <p class="intro-text">
+            Vous êtes invités à découvrir une nouvelle façon
+            d’annoncer les grands moments.
+          </p>
+          <button class="open-btn" id="openBtn">Ouvrir l’invitation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     /* CONTENU */
     .hidden {
@@ -247,6 +188,148 @@
       <button class="open-btn" id="openBtn">Ouvrir l’invitation</button>
     </div>
   </section>
+  
+  #intro {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+  overflow: hidden;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+#intro.hide {
+  opacity: 0;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+.intro-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(20,20,20,0.25), rgba(20,20,20,0.35)),
+    linear-gradient(rgba(246,243,238,0.20), rgba(246,243,238,0.30));
+  backdrop-filter: blur(1px);
+}
+
+.envelope-wrap {
+  position: relative;
+  z-index: 2;
+  perspective: 1200px;
+}
+
+.envelope {
+  position: relative;
+  width: 340px;
+  height: 240px;
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #f2ede4 0%, #e8dfd1 100%);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+  overflow: hidden;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background: linear-gradient(180deg, #ede4d7 0%, #dfd2bf 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.9s ease;
+  z-index: 3;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.letter {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 88%;
+  transform: translateX(-50%);
+  transition: transform 0.9s ease;
+  z-index: 2;
+}
+
+.envelope.open .letter {
+  transform: translateX(-50%) translateY(-55px);
+}
+
+.letter-inner {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(6px);
+  border-radius: 18px;
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+  border: 1px solid rgba(255,255,255,0.65);
+}
+
+.surtitle {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8d8476;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  line-height: 1.1;
+  margin: 0 0 12px;
+  color: #2a2a2a;
+}
+
+.intro-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #565656;
+  margin-bottom: 22px;
+}
+
+.open-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 13px 24px;
+  background: linear-gradient(135deg, #8a9a8c, #6f8172);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(111,129,114,0.30);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.open-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.96;
+}
+
+@media (max-width: 480px) {
+  .envelope {
+    width: 300px;
+    height: 220px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+}
 
   <!-- CONTENU -->
   <main id="content" class="hidden">
