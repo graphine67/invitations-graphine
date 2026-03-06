@@ -450,7 +450,36 @@ h1 {
     document.querySelectorAll(".fade-in").forEach((el) => {
       observer.observe(el);
     });
-  </script>
+  </script>const openBtn = document.getElementById("openBtn");
+const intro = document.getElementById("intro");
+const content = document.getElementById("content");
+const music = document.getElementById("music");
+const envelope = document.getElementById("envelope");
+
+openBtn.addEventListener("click", () => {
+  envelope.classList.add("open");
+
+  setTimeout(() => {
+    intro.classList.add("hide");
+  }, 900);
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    content.classList.remove("hidden");
+
+    const elements = document.querySelectorAll(".fade-in");
+    elements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add("visible");
+      }, index * 180);
+    });
+
+    if (music) {
+      music.play().catch(() => {});
+    }
+  }, 1600);
+});
 
 </body>
+  
 </html>
