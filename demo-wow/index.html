@@ -38,7 +38,7 @@
       justify-content: center;
       padding: 24px;
       background:
-        linear-gradient(rgba(18,18,18,0.30), rgba(18,18,18,0.42)),
+        linear-gradient(rgba(18,18,18,0.28), rgba(18,18,18,0.42)),
         url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
       overflow: hidden;
       transition: opacity 1s ease, transform 1s ease;
@@ -53,8 +53,7 @@
     .intro-glow {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 50%);
+      background: radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 55%);
       pointer-events: none;
     }
 
@@ -65,7 +64,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      perspective: 1400px;
     }
 
     .envelope {
@@ -76,36 +74,27 @@
       filter: drop-shadow(0 28px 60px rgba(0,0,0,0.28));
     }
 
-    .envelope-back {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, #f3ebde 0%, #e8dbc5 100%);
-      border-radius: 0 0 24px 24px;
-      z-index: 1;
-    }
-
     .letter {
       position: absolute;
       left: 50%;
-      bottom: 26px;
-      width: 78%;
-      transform: translateX(-50%) translateY(92px);
+      bottom: 10px;
+      width: 76%;
+      transform: translateX(-50%) translateY(105px);
       transition: transform 1s ease;
-      z-index: 2;
+      z-index: 1;
     }
 
     .envelope.open .letter {
-      transform: translateX(-50%) translateY(-72px);
+      transform: translateX(-50%) translateY(-54px);
     }
 
     .letter-inner {
-      background: rgba(255,255,255,0.95);
-      border-radius: 22px;
-      padding: 28px 24px 30px;
+      background: rgba(255,255,255,0.96);
+      border-radius: 18px;
+      padding: 26px 22px 28px;
       text-align: center;
-      box-shadow: 0 18px 38px rgba(0,0,0,0.10);
-      border: 1px solid rgba(255,255,255,0.72);
-      backdrop-filter: blur(8px);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+      border: 1px solid rgba(255,255,255,0.75);
     }
 
     .surtitle {
@@ -118,7 +107,7 @@
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 46px;
+      font-size: 44px;
       line-height: 1.05;
       margin: 0 0 14px;
       color: #1f1f1f;
@@ -128,7 +117,7 @@
       font-size: 15px;
       line-height: 1.7;
       color: #5e5e5e;
-      margin: 0 0 24px;
+      margin: 0 0 22px;
     }
 
     .open-btn {
@@ -145,62 +134,92 @@
     }
 
     .open-btn:hover {
-      transform: translateY(-2px) scale(1.02);
+      transform: translateY(-2px);
       opacity: 0.98;
     }
 
-    .envelope-left,
-    .envelope-right,
-    .envelope-bottom,
-    .envelope-flap {
+    .envelope-back {
       position: absolute;
-      pointer-events: none;
-    }
-
-    .envelope-bottom {
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 72%;
-      background: linear-gradient(180deg, #f6efe4 0%, #ece1cf 100%);
-      border-radius: 0 0 24px 24px;
-      z-index: 3;
+      inset: 0;
+      background: #f1e8da;
+      border-radius: 6px;
+      z-index: 2;
     }
 
     .envelope-left {
+      position: absolute;
       left: 0;
       bottom: 0;
       width: 50%;
-      height: 72%;
-      background: linear-gradient(180deg, #f8f2e8 0%, #efe4d3 100%);
+      height: 68%;
+      background: #f7f1e8;
       clip-path: polygon(0 0, 100% 50%, 0 100%);
       z-index: 4;
     }
 
     .envelope-right {
+      position: absolute;
       right: 0;
       bottom: 0;
       width: 50%;
-      height: 72%;
-      background: linear-gradient(180deg, #f8f2e8 0%, #efe4d3 100%);
+      height: 68%;
+      background: #f7f1e8;
       clip-path: polygon(100% 0, 0 50%, 100% 100%);
       z-index: 4;
     }
 
+    .envelope-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 68%;
+      background: #f3ebdf;
+      clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+      z-index: 3;
+    }
+
     .envelope-flap {
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 52%;
-      background: linear-gradient(180deg, #eee2cf 0%, #dcccb3 100%);
+      background: #e7dbc8;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transform-origin: top center;
       transition: transform 1s ease;
-      z-index: 5;
+      z-index: 6;
     }
 
     .envelope.open .envelope-flap {
       transform: rotateX(180deg);
+    }
+
+    .seal {
+      position: absolute;
+      top: 44%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #b64a4a, #7e2323 70%);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.20);
+      z-index: 7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.92);
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+    }
+
+    .envelope.open .seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.65);
     }
 
     /* CONTENU */
@@ -329,6 +348,7 @@
       display: block;
       box-shadow: 0 12px 25px rgba(0,0,0,0.08);
       transition: transform 0.3s ease;
+      background: #ddd;
     }
 
     .gallery img:hover {
@@ -353,6 +373,10 @@
 
       .envelope {
         height: 280px;
+      }
+
+      .letter {
+        width: 80%;
       }
 
       h1 {
@@ -396,8 +420,6 @@
 
     <div class="scene">
       <div class="envelope" id="envelope">
-        <div class="envelope-back"></div>
-
         <div class="letter">
           <div class="letter-inner">
             <div class="surtitle">Démo Graphine</div>
@@ -410,10 +432,12 @@
           </div>
         </div>
 
+        <div class="envelope-back"></div>
         <div class="envelope-bottom"></div>
         <div class="envelope-left"></div>
         <div class="envelope-right"></div>
         <div class="envelope-flap"></div>
+        <div class="seal">G</div>
       </div>
     </div>
   </section>
@@ -486,10 +510,10 @@
       <div class="card">
         <h3>Quelques souvenirs</h3>
         <div class="gallery">
-          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Photo couple 1">
-          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80" alt="Photo couple 2">
-          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 1">
-          <img src="https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21d?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 2">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 1">
+          <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 2">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 3">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 4">
         </div>
       </div>
     </section>
@@ -521,7 +545,7 @@
 
       setTimeout(() => {
         intro.classList.add("hide");
-      }, 1150);
+      }, 1200);
 
       setTimeout(() => {
         intro.style.display = "none";
@@ -537,7 +561,7 @@
         if (music) {
           music.play().catch(() => {});
         }
-      }, 1900);
+      }, 2000);
     });
 
     const observer = new IntersectionObserver((entries) => {
