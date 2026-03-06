@@ -21,7 +21,7 @@
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: #f6f3ee;
+      background: linear-gradient(180deg, #f4efe8 0%, #ece6de 100%);
       color: #2a2a2a;
     }
 
@@ -38,44 +38,43 @@
       justify-content: center;
       padding: 24px;
       background:
-        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+        radial-gradient(circle at center, rgba(255,255,255,0.10), rgba(0,0,0,0.35)),
+        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
       overflow: hidden;
-      transition: opacity 0.9s ease, transform 0.9s ease;
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     #intro.hide {
       opacity: 0;
-      transform: scale(1.02);
+      transform: scale(1.04);
       pointer-events: none;
     }
 
     .intro-overlay {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(rgba(20,20,20,0.25), rgba(20,20,20,0.35)),
-        linear-gradient(rgba(246,243,238,0.20), rgba(246,243,238,0.30));
-      backdrop-filter: blur(1px);
+      background: linear-gradient(rgba(20,20,20,0.18), rgba(20,20,20,0.42));
+      backdrop-filter: blur(2px);
     }
 
     .envelope-wrap {
       position: relative;
       z-index: 2;
-      perspective: 1200px;
+      perspective: 1400px;
     }
 
     .envelope {
       position: relative;
-      width: 340px;
-      height: 240px;
+      width: 380px;
+      height: 270px;
+      filter: drop-shadow(0 24px 50px rgba(0,0,0,0.25));
     }
 
     .envelope-body {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, #f2ede4 0%, #e8dfd1 100%);
-      border-radius: 0 0 18px 18px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+      background: linear-gradient(180deg, #f4eee4 0%, #e7dcc9 100%);
+      border-radius: 0 0 24px 24px;
       overflow: hidden;
     }
 
@@ -84,11 +83,11 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 130px;
-      background: linear-gradient(180deg, #ede4d7 0%, #dfd2bf 100%);
+      height: 145px;
+      background: linear-gradient(180deg, #eee3d2 0%, #ddcfb8 100%);
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transform-origin: top center;
-      transition: transform 0.9s ease;
+      transition: transform 1s ease;
       z-index: 3;
     }
 
@@ -99,119 +98,135 @@
     .letter {
       position: absolute;
       left: 50%;
-      bottom: 10px;
+      bottom: 12px;
       width: 88%;
       transform: translateX(-50%);
-      transition: transform 0.9s ease;
+      transition: transform 1s ease;
       z-index: 2;
     }
 
     .envelope.open .letter {
-      transform: translateX(-50%) translateY(-55px);
+      transform: translateX(-50%) translateY(-72px);
     }
 
     .letter-inner {
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(6px);
-      border-radius: 18px;
-      padding: 28px 22px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 22px;
+      padding: 32px 24px;
       text-align: center;
-      box-shadow: 0 14px 34px rgba(0,0,0,0.10);
-      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.10);
+      border: 1px solid rgba(255,255,255,0.75);
     }
 
     .surtitle {
       font-size: 11px;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: #8d8476;
-      margin-bottom: 10px;
+      color: #9a8f82;
+      margin-bottom: 12px;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 40px;
-      line-height: 1.1;
-      margin: 0 0 12px;
-      color: #2a2a2a;
+      font-size: 46px;
+      line-height: 1.05;
+      margin: 0 0 14px;
+      color: #1f1f1f;
     }
 
     .intro-text {
       font-size: 15px;
-      line-height: 1.6;
-      color: #565656;
-      margin-bottom: 22px;
+      line-height: 1.7;
+      color: #5c5c5c;
+      margin-bottom: 24px;
     }
 
     .open-btn {
       border: none;
       border-radius: 999px;
-      padding: 13px 24px;
-      background: linear-gradient(135deg, #8a9a8c, #6f8172);
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #7f9181, #657766);
       color: white;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 8px 22px rgba(111,129,114,0.30);
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 12px 26px rgba(101,119,102,0.28);
+      transition: transform 0.25s ease, opacity 0.25s ease;
     }
 
     .open-btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.96;
+      transform: translateY(-2px) scale(1.02);
+      opacity: 0.97;
     }
 
     /* CONTENU */
     main {
-      padding: 0 0 60px;
+      padding: 0 0 70px;
     }
 
     .hero {
-      padding: 72px 20px 40px;
+      padding: 110px 20px 50px;
       text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "18 • 06 • 2027";
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 8vw, 82px);
+      color: rgba(111,129,114,0.14);
+      letter-spacing: 4px;
+      margin-bottom: 10px;
     }
 
     .hero h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 40px;
-      margin: 0 0 12px;
+      font-size: 48px;
+      margin: 0 0 14px;
+      color: #1f1f1f;
     }
 
     .hero p {
       margin: 0;
-      font-size: 17px;
-      color: #5d5d5d;
+      font-size: 18px;
+      color: #6a6a6a;
     }
 
     .section {
-      max-width: 900px;
-      margin: 0 auto 28px;
+      max-width: 980px;
+      margin: 0 auto 34px;
       padding: 0 20px;
     }
 
     .card {
-      background: #fff;
-      border-radius: 24px;
-      padding: 28px 22px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.58);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 30px;
+      padding: 34px 28px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.06);
     }
 
     .card h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 28px;
+      font-size: 34px;
       margin-top: 0;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      color: #1f1f1f;
     }
 
     .card p {
-      line-height: 1.7;
+      line-height: 1.8;
       margin: 0;
       color: #555;
+      font-size: 17px;
     }
 
     .timeline-item {
-      padding: 12px 0;
-      border-bottom: 1px solid #eee;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .timeline-item:last-child {
@@ -219,42 +234,69 @@
     }
 
     .timeline-time {
-      font-weight: 600;
-      color: #8a9a8c;
+      font-weight: 700;
+      color: #7f9181;
       margin-bottom: 4px;
+      font-size: 18px;
+    }
+
+    .place-btn,
+    .rsvp-btn {
+      display: inline-block;
+      margin-top: 22px;
+      background: #1f1f1f;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .place-btn:hover,
+    .rsvp-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.96;
+    }
+
+    .dress-code {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(127,145,129,0.12);
+      color: #586758;
+      font-weight: 600;
+      font-size: 14px;
     }
 
     .gallery {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 16px;
+      gap: 14px;
+      margin-top: 18px;
     }
 
     .gallery img {
       width: 100%;
-      height: 220px;
+      height: 240px;
       object-fit: cover;
-      border-radius: 18px;
+      border-radius: 22px;
       display: block;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
     }
 
-    .rsvp-btn {
-      display: inline-block;
-      margin-top: 18px;
-      background: #2a2a2a;
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 999px;
-      font-weight: 600;
+    .gallery img:hover {
+      transform: scale(1.02);
     }
 
-    /* APPARITIONS */
+    /* ANIMATIONS */
     .fade-in {
       opacity: 0;
       transform: translateY(28px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
 
     .fade-in.visible {
@@ -264,11 +306,20 @@
 
     @media (max-width: 640px) {
       h1 {
-        font-size: 34px;
+        font-size: 38px;
       }
 
       .hero h2 {
-        font-size: 32px;
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .envelope {
+        width: 320px;
+        height: 240px;
       }
 
       .gallery {
@@ -276,25 +327,25 @@
       }
 
       .gallery img {
-        height: 200px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .envelope {
-        width: 300px;
-        height: 220px;
+        height: 210px;
       }
 
-      h1 {
-        font-size: 34px;
+      .card {
+        padding: 28px 22px;
+      }
+
+      .card h3 {
+        font-size: 30px;
+      }
+
+      .card p {
+        font-size: 16px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- INTRO -->
   <section id="intro">
     <div class="intro-overlay"></div>
 
@@ -308,8 +359,8 @@
             <div class="surtitle">Démo Graphine</div>
             <h1>Marie & Thomas</h1>
             <p class="intro-text">
-              Vous êtes invités à découvrir une nouvelle façon
-              d’annoncer les grands moments.
+              Découvrez une invitation numérique plus vivante,
+              plus élégante, plus mémorable.
             </p>
             <button class="open-btn" id="openBtn">Ouvrir l’invitation</button>
           </div>
@@ -318,7 +369,6 @@
     </div>
   </section>
 
-  <!-- CONTENU -->
   <main id="content" class="hidden">
     <section class="hero fade-in">
       <h2>Nous nous marions</h2>
@@ -330,7 +380,8 @@
         <h3>L’annonce</h3>
         <p>
           Entourés de ceux que nous aimons, nous aurions la joie de vous compter
-          parmi nous pour célébrer cette journée unique.
+          parmi nous pour célébrer cette journée unique, faite de lumière, de rires
+          et de verres qui tintent un peu trop joyeusement.
         </p>
       </div>
     </section>
@@ -365,9 +416,22 @@
       <div class="card">
         <h3>Le lieu</h3>
         <p>
-          Domaine du Château, 12 route des Fleurs, 67000 Strasbourg.
-          Un cadre élégant pour une journée pleine d’émotion, de rires et de jolis verres levés.
+          Domaine du Château, 12 route des Fleurs, 67000 Strasbourg.<br>
+          Un lieu élégant, un peu hors du temps, parfait pour célébrer les grandes
+          émotions et les petites larmes discrètes.
         </p>
+        <a class="place-btn" href="https://maps.google.com" target="_blank" rel="noopener">Voir l’itinéraire</a>
+      </div>
+    </section>
+
+    <section class="section fade-in">
+      <div class="card">
+        <h3>Dress code</h3>
+        <p>
+          Une tenue chic, douce et lumineuse. Les tons naturels, poudrés et végétaux
+          sont les bienvenus.
+        </p>
+        <div class="dress-code">Champêtre chic · Beige · Sauge · Doré</div>
       </div>
     </section>
 
@@ -410,7 +474,7 @@
 
       setTimeout(() => {
         intro.classList.add("hide");
-      }, 900);
+      }, 1100);
 
       setTimeout(() => {
         intro.style.display = "none";
@@ -420,13 +484,13 @@
         elements.forEach((el, index) => {
           setTimeout(() => {
             el.classList.add("visible");
-          }, index * 180);
+          }, index * 220);
         });
 
         if (music) {
           music.play().catch(() => {});
         }
-      }, 1600);
+      }, 1900);
     });
 
     const observer = new IntersectionObserver((entries) => {
