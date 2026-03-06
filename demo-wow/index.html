@@ -38,69 +38,58 @@
       justify-content: center;
       padding: 24px;
       background:
-        radial-gradient(circle at center, rgba(255,255,255,0.10), rgba(0,0,0,0.35)),
-        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+        linear-gradient(rgba(18,18,18,0.30), rgba(18,18,18,0.42)),
+        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
       overflow: hidden;
       transition: opacity 1s ease, transform 1s ease;
     }
 
     #intro.hide {
       opacity: 0;
-      transform: scale(1.04);
+      transform: scale(1.03);
       pointer-events: none;
     }
 
-    .intro-overlay {
+    .intro-glow {
       position: absolute;
       inset: 0;
-      background: linear-gradient(rgba(20,20,20,0.18), rgba(20,20,20,0.42));
-      backdrop-filter: blur(2px);
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 50%);
+      pointer-events: none;
     }
 
-    .envelope-wrap {
+    .scene {
       position: relative;
       z-index: 2;
+      width: min(92vw, 460px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       perspective: 1400px;
     }
 
     .envelope {
       position: relative;
-      width: 380px;
-      height: 270px;
-      filter: drop-shadow(0 24px 50px rgba(0,0,0,0.25));
+      width: 100%;
+      max-width: 420px;
+      height: 300px;
+      filter: drop-shadow(0 28px 60px rgba(0,0,0,0.28));
     }
 
-    .envelope-body {
+    .envelope-back {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, #f4eee4 0%, #e7dcc9 100%);
+      background: linear-gradient(180deg, #f3ebde 0%, #e8dbc5 100%);
       border-radius: 0 0 24px 24px;
-      overflow: hidden;
-    }
-
-    .envelope-flap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 145px;
-      background: linear-gradient(180deg, #eee3d2 0%, #ddcfb8 100%);
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      transform-origin: top center;
-      transition: transform 1s ease;
-      z-index: 3;
-    }
-
-    .envelope.open .envelope-flap {
-      transform: rotateX(180deg);
+      z-index: 1;
     }
 
     .letter {
       position: absolute;
       left: 50%;
-      bottom: 12px;
-      width: 88%;
-      transform: translateX(-50%);
+      bottom: 26px;
+      width: 78%;
+      transform: translateX(-50%) translateY(92px);
       transition: transform 1s ease;
       z-index: 2;
     }
@@ -110,13 +99,13 @@
     }
 
     .letter-inner {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.95);
       border-radius: 22px;
-      padding: 32px 24px;
+      padding: 28px 24px 30px;
       text-align: center;
-      box-shadow: 0 16px 36px rgba(0,0,0,0.10);
-      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.10);
+      border: 1px solid rgba(255,255,255,0.72);
+      backdrop-filter: blur(8px);
     }
 
     .surtitle {
@@ -138,8 +127,8 @@
     .intro-text {
       font-size: 15px;
       line-height: 1.7;
-      color: #5c5c5c;
-      margin-bottom: 24px;
+      color: #5e5e5e;
+      margin: 0 0 24px;
     }
 
     .open-btn {
@@ -147,17 +136,71 @@
       border-radius: 999px;
       padding: 14px 28px;
       background: linear-gradient(135deg, #7f9181, #657766);
-      color: white;
+      color: #fff;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       box-shadow: 0 12px 26px rgba(101,119,102,0.28);
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
     .open-btn:hover {
       transform: translateY(-2px) scale(1.02);
-      opacity: 0.97;
+      opacity: 0.98;
+    }
+
+    .envelope-left,
+    .envelope-right,
+    .envelope-bottom,
+    .envelope-flap {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .envelope-bottom {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 72%;
+      background: linear-gradient(180deg, #f6efe4 0%, #ece1cf 100%);
+      border-radius: 0 0 24px 24px;
+      z-index: 3;
+    }
+
+    .envelope-left {
+      left: 0;
+      bottom: 0;
+      width: 50%;
+      height: 72%;
+      background: linear-gradient(180deg, #f8f2e8 0%, #efe4d3 100%);
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      z-index: 4;
+    }
+
+    .envelope-right {
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      height: 72%;
+      background: linear-gradient(180deg, #f8f2e8 0%, #efe4d3 100%);
+      clip-path: polygon(100% 0, 0 50%, 100% 100%);
+      z-index: 4;
+    }
+
+    .envelope-flap {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 52%;
+      background: linear-gradient(180deg, #eee2cf 0%, #dcccb3 100%);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      transition: transform 1s ease;
+      z-index: 5;
+    }
+
+    .envelope.open .envelope-flap {
+      transform: rotateX(180deg);
     }
 
     /* CONTENU */
@@ -201,7 +244,7 @@
     }
 
     .card {
-      background: rgba(255,255,255,0.58);
+      background: rgba(255,255,255,0.62);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.55);
       border-radius: 30px;
@@ -292,7 +335,6 @@
       transform: scale(1.02);
     }
 
-    /* ANIMATIONS */
     .fade-in {
       opacity: 0;
       transform: translateY(28px);
@@ -305,6 +347,14 @@
     }
 
     @media (max-width: 640px) {
+      .scene {
+        width: min(94vw, 380px);
+      }
+
+      .envelope {
+        height: 280px;
+      }
+
       h1 {
         font-size: 38px;
       }
@@ -315,11 +365,6 @@
 
       .hero p {
         font-size: 16px;
-      }
-
-      .envelope {
-        width: 320px;
-        height: 240px;
       }
 
       .gallery {
@@ -347,12 +392,11 @@
 <body>
 
   <section id="intro">
-    <div class="intro-overlay"></div>
+    <div class="intro-glow"></div>
 
-    <div class="envelope-wrap">
+    <div class="scene">
       <div class="envelope" id="envelope">
-        <div class="envelope-flap"></div>
-        <div class="envelope-body"></div>
+        <div class="envelope-back"></div>
 
         <div class="letter">
           <div class="letter-inner">
@@ -365,6 +409,11 @@
             <button class="open-btn" id="openBtn">Ouvrir l’invitation</button>
           </div>
         </div>
+
+        <div class="envelope-bottom"></div>
+        <div class="envelope-left"></div>
+        <div class="envelope-right"></div>
+        <div class="envelope-flap"></div>
       </div>
     </div>
   </section>
@@ -381,7 +430,7 @@
         <p>
           Entourés de ceux que nous aimons, nous aurions la joie de vous compter
           parmi nous pour célébrer cette journée unique, faite de lumière, de rires
-          et de verres qui tintent un peu trop joyeusement.
+          et de verres levés.
         </p>
       </div>
     </section>
@@ -417,8 +466,7 @@
         <h3>Le lieu</h3>
         <p>
           Domaine du Château, 12 route des Fleurs, 67000 Strasbourg.<br>
-          Un lieu élégant, un peu hors du temps, parfait pour célébrer les grandes
-          émotions et les petites larmes discrètes.
+          Un lieu élégant, un peu hors du temps, parfait pour célébrer les grandes émotions.
         </p>
         <a class="place-btn" href="https://maps.google.com" target="_blank" rel="noopener">Voir l’itinéraire</a>
       </div>
@@ -428,8 +476,7 @@
       <div class="card">
         <h3>Dress code</h3>
         <p>
-          Une tenue chic, douce et lumineuse. Les tons naturels, poudrés et végétaux
-          sont les bienvenus.
+          Une tenue chic, douce et lumineuse. Les tons naturels, poudrés et végétaux sont les bienvenus.
         </p>
         <div class="dress-code">Champêtre chic · Beige · Sauge · Doré</div>
       </div>
@@ -439,9 +486,9 @@
       <div class="card">
         <h3>Quelques souvenirs</h3>
         <div class="gallery">
-          <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=900&q=80" alt="Photo couple 1">
-          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Photo couple 2">
-          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 1">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Photo couple 1">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80" alt="Photo couple 2">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 1">
           <img src="https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21d?auto=format&fit=crop&w=900&q=80" alt="Photo mariage 2">
         </div>
       </div>
@@ -474,7 +521,7 @@
 
       setTimeout(() => {
         intro.classList.add("hide");
-      }, 1100);
+      }, 1150);
 
       setTimeout(() => {
         intro.style.display = "none";
